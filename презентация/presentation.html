@@ -4,352 +4,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Генератор Портфолио - Презентация</title>
+    <title>Шаблон сайта портфолио - Презентация</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" id="theme">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css" id="theme">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Custom Styles for "Beautiful" Look */
+        /* Base Styles - Light Theme */
         body,
         .reveal {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+            background-color: #f8fafc !important;
+            /* Slate 50 */
+            color: #1e293b !important;
+            /* Slate 800 */
+            font-family: 'Inter', sans-serif !important;
+            font-size: 24px !important;
+            /* Base size ~18pt */
         }
 
-        /* Fix for Reveal.js scaling */
-        .reveal .slides section {
-            text-align: left;
-            height: 100%;
+        /* Typography */
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            font-family: 'Inter', sans-serif;
+            text-transform: none;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #0f172a !important;
+            /* Slate 900 */
+        }
+
+        .reveal h1 {
+            font-size: 72px !important;
+            /* ~54pt */
+            margin-bottom: 0.2em;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal h2 {
+            font-size: 60px !important;
+            /* ~45pt (Min 44pt requested) */
+            margin-bottom: 0.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .reveal h3 {
+            font-size: 48px !important;
+            /* ~36pt */
+            font-weight: 600;
+        }
+
+        .reveal h4 {
+            font-size: 36px !important;
+            /* ~27pt */
+        }
+
+        .reveal p,
+        .reveal li {
+            color: #334155;
+            /* Slate 700 */
+            font-size: 24px !important;
+            /* 18pt requested */
+            line-height: 1.5;
+        }
+
+        .reveal span {
+            font-size: inherit;
+        }
+
+        .highlight-text {
+            color: #2563eb;
+            /* Blue 600 */
+            font-weight: 700;
+        }
+
+        /* Cards - Compact Design */
+        .content-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        /* Title Slide Specifics */
-        .title-slide {
-            text-align: center !important;
-            align-items: center !important;
+        /* Layout Utilities */
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            height: 100%;
         }
 
-        .reveal h1,
-        .reveal h2,
-        .reveal h3 {
-            text-transform: none;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-weight: 700;
-            margin-bottom: 0.5em;
+        .image-container {
+            height: 400px;
+            /* Increased slightly to match larger text */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .reveal h1 {
-            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2.5em;
-            /* Reduced from 3.5em */
-            line-height: 1.2;
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .reveal h2 {
-            color: #4facfe;
-            font-size: 1.8em;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
         }
 
-        .reveal h3 {
-            font-size: 1.3em;
-            color: #e0e0e0;
-        }
-
-        .reveal p,
-        .reveal li {
-            font-size: 1em;
-            /* Standardize font size */
-            line-height: 1.5;
-            color: #e0e0e0;
-        }
-
-        .highlight-text {
-            color: #00f2fe;
-            font-weight: bold;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .feature-item {
             text-align: center;
+            padding: 1.5rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
             transition: transform 0.3s ease;
-            flex: 1;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
         }
 
         .feature-icon {
-            font-size: 2.5em;
-            /* Reduced size */
-            margin-bottom: 10px;
-            background: linear-gradient(to bottom right, #4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #2563eb;
         }
 
-        .split-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 1.5rem;
+        /* Code Blocks */
+        .reveal pre {
+            background: #f1f5f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            margin: 0;
             width: 100%;
         }
 
-        .split-col {
-            flex: 1;
+        .reveal code {
+            font-family: 'Fira Code', monospace;
+            font-size: 20px !important;
+            /* Slightly smaller than body text for code */
+            line-height: 1.3;
+            color: #334155;
+            max-height: 400px;
         }
 
-        /* Animated Background Particles */
-        .particles {
+        /* Particles */
+        #particles-js {
             position: fixed;
+            width: 100%;
+            height: 100%;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
             z-index: 1;
-            /* Changed to be above background but below content */
             pointer-events: none;
         }
 
-        .particle {
-            position: absolute;
-            display: block;
-            pointer-events: none;
-            width: 4px;
-            height: 4px;
-            background-color: rgba(79, 172, 254, 0.3);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        code {
-            font-family: 'Fira Code', monospace;
-        }
-
-        .reveal pre {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            width: 100%;
-        }
-
-        /* Utility to ensure content fits */
         .reveal .slides {
-            height: 100%;
+            z-index: 2;
+        }
+
+        /* Utility */
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Fix for specific slides */
+        .reveal .slides section {
+            padding: 0;
+            /* Remove default padding */
+        }
+
+        /* Slide Numbers */
+        .reveal .slide-number {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            z-index: 1000;
         }
     </style>
 </head>
 
 <body>
-    <div class="particles" id="particles"></div>
+    <div id="particles-js"></div>
 
     <div class="reveal">
         <div class="slides">
 
             <!-- Slide 1: Title -->
-            <section class="title-slide">
-                <div style="margin-bottom: 1rem;">
-                    <i class="fas fa-rocket fa-3x"
-                        style="background: linear-gradient(to right, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
-                </div>
-                <h1>Генератор Портфолио</h1>
-                <h3>Профессиональный сайт за 5 минут</h3>
-                <p style="margin-top: 2rem; font-size: 0.8em; opacity: 0.7;">
-                    Кононенко Максим • Овчинников Глеб • Дроздов Андрей
-                </p>
-            </section>
-
-            <!-- Slide 2: The Problem -->
             <section>
-                <h2><i class="fas fa-exclamation-triangle"></i> Проблема</h2>
-                <div class="split-container">
-                    <div class="feature-card">
-                        <i class="fas fa-clock feature-icon"></i>
-                        <h4>Долго</h4>
-                        <p style="font-size: 0.7em">Создание сайта с нуля занимает недели изучения HTML/CSS.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-money-bill-wave feature-icon"></i>
-                        <h4>Дорого</h4>
-                        <p style="font-size: 0.7em">Конструкторы (Tilda, Wix) требуют подписки.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-laptop-code feature-icon"></i>
-                        <h4>Сложно</h4>
-                        <p style="font-size: 0.7em">Новичкам трудно сделать адаптивность.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 3: The Solution -->
-            <section>
-                <h2><i class="fas fa-lightbulb"></i> Решение</h2>
                 <div class="split-container" style="align-items: center;">
-                    <div class="split-col">
-                        <ul style="font-size: 0.9em; list-style-type: none; padding: 0;">
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle highlight-text"></i>
-                                <strong>Готовый шаблон</strong><br><span style="opacity:0.7">Современный, адаптивный,
-                                    анимированный.</span></li>
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle highlight-text"></i>
-                                <strong>Автоматизация</strong><br><span style="opacity:0.7">Программа
-                                    <code>update.exe</code> заполняет сайт за вас.</span></li>
-                            <li><i class="fas fa-check-circle highlight-text"></i> <strong>Без кода</strong><br><span
-                                    style="opacity:0.7">Не нужно знать HTML, просто ответьте на вопросы.</span></li>
+                    <div class="text-left" style="display: flex; flex-direction: column; justify-content: center;">
+                        <div style="margin-bottom: 1rem;">
+                            <i class="fas fa-rocket fa-3x" style="color: #2563eb;"></i>
+                        </div>
+                        <h1>Шаблон сайта портфолио</h1>
+                        <h3 style="color: #64748b; font-weight: 400; margin-bottom: 2rem;">Профессиональный сайт за 5
+                            минут</h3>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <!-- Simple Team List with Icons -->
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <i class="fas fa-user-circle fa-lg" style="color: #94a3b8;"></i>
+                                <span style="font-weight: 600; color: #334155;">Кононенко М.</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <i class="fas fa-user-circle fa-lg" style="color: #94a3b8;"></i>
+                                <span style="font-weight: 600; color: #334155;">Овчинников Г.</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <i class="fas fa-user-circle fa-lg" style="color: #94a3b8;"></i>
+                                <span style="font-weight: 600; color: #334155;">Дроздов А.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fixed Image Container -->
+                    <div class="image-container"
+                        style="height: 400px; border: none; box-shadow: none; background: transparent;">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
+                            alt="Coding Laptop" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Problem -->
+            <section>
+                <div class="split-container">
+                    <div class="image-container"
+                        style="height: 400px; border: none; box-shadow: none; background: transparent;">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
+                            alt="Frustrated Coding"
+                            style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    </div>
+                    <div class="content-card text-left">
+                        <h2 style="justify-content: flex-start;"><i class="fas fa-exclamation-circle"
+                                style="color: #ef4444;"></i> Проблема</h2>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+                                <div style="background: #fee2e2; padding: 8px; border-radius: 8px;"><i
+                                        class="fas fa-clock" style="color: #ef4444;"></i></div>
+                                <div>
+                                    <strong>Долго и сложно</strong><br>
+                                    <span style="color: #64748b;">Изучение HTML/CSS/JS занимает месяцы.</span>
+                                </div>
+                            </li>
+                            <li style="margin-bottom: 1rem; display: flex; align-items: start; gap: 1rem;">
+                                <div style="background: #fee2e2; padding: 8px; border-radius: 8px;"><i
+                                        class="fas fa-wallet" style="color: #ef4444;"></i></div>
+                                <div>
+                                    <strong>Дорого</strong><br>
+                                    <span style="color: #64748b;">Конструкторы требуют оплаты.</span>
+                                </div>
+                            </li>
+                            <li style="display: flex; align-items: start; gap: 1rem;">
+                                <div style="background: #fee2e2; padding: 8px; border-radius: 8px;"><i
+                                        class="fas fa-clone" style="color: #ef4444;"></i></div>
+                                <div>
+                                    <strong>Нет уникальности</strong><br>
+                                    <span style="color: #64748b;">Шаблонные резюме выглядят одинаково.</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                    <div class="split-col" style="text-align: center;">
-                        <i class="fas fa-magic fa-6x" style="opacity: 0.2; color: #4facfe;"></i>
+                </div>
+            </section>
+
+            <!-- Slide 3: Solution -->
+            <section>
+                <div class="text-center" style="margin-bottom: 2rem;">
+                    <h2><i class="fas fa-magic" style="color: #4f46e5;"></i> Наше Решение</h2>
+                    <p style="font-size: 28px !important; color: #64748b;">Система для мгновенного создания портфолио
+                    </p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-layer-group feature-icon"></i>
+                        <h4>Готовый Шаблон</h4>
+                        <p style="color: #64748b;">Современный дизайн на Tailwind CSS.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-robot feature-icon"></i>
+                        <h4>Автоматизация</h4>
+                        <p style="color: #64748b;">Скрипт <code>update.exe</code> пишет код за вас.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h4>Скорость</h4>
+                        <p style="color: #64748b;">Готовый сайт за 5 минут.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Slide 4: Frontend Tech -->
+            <!-- Slide 4: Tech Stack -->
             <section>
-                <h2><i class="fas fa-code"></i> Технологии: Frontend</h2>
                 <div class="split-container">
-                    <div class="feature-card">
-                        <i class="fab fa-html5 feature-icon"></i>
-                        <h4>HTML5</h4>
-                        <p style="font-size: 0.6em">Семантическая верстка</p>
+                    <div class="text-left">
+                        <h2 style="justify-content: flex-start;"><i class="fas fa-code"></i> Технологии</h2>
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: #2563eb; margin-bottom: 1rem;">Frontend</h4>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <span
+                                    style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 0.5rem 1rem; border-radius: 6px; color: #1d4ed8; font-weight: 600;">HTML5</span>
+                                <span
+                                    style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 0.5rem 1rem; border-radius: 6px; color: #0284c7; font-weight: 600;">Tailwind
+                                    CSS</span>
+                                <span
+                                    style="background: #fdf2f8; border: 1px solid #fbcfe8; padding: 0.5rem 1rem; border-radius: 6px; color: #db2777; font-weight: 600;">jQuery</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #7c3aed; margin-bottom: 1rem;">Backend / Script</h4>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <span
+                                    style="background: #f5f3ff; border: 1px solid #ddd6fe; padding: 0.5rem 1rem; border-radius: 6px; color: #7c3aed; font-weight: 600;">Python</span>
+                                <span
+                                    style="background: #fffbeb; border: 1px solid #fde68a; padding: 0.5rem 1rem; border-radius: 6px; color: #d97706; font-weight: 600;">BeautifulSoup4</span>
+                                <span
+                                    style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 0.5rem 1rem; border-radius: 6px; color: #059669; font-weight: 600;">PyInstaller</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <i class="fab fa-css3-alt feature-icon"></i>
-                        <h4>Tailwind</h4>
-                        <p style="font-size: 0.6em">Utility-first стили</p>
+                    <div style="position: relative;">
+                        <pre><code class="python" data-trim data-noescape>
+# Магия автоматизации
+def update_portfolio(data):
+    soup = BeautifulSoup(html, 'html.parser')
+    
+    # Обновляем имя
+    soup.find('h1').string = data['name']
+    
+    # Генерируем проекты
+    for project in data['projects']:
+        new_card = create_card(project)
+        soup.find('#portfolio').append(new_card)
+        
+    return soup.prettify()
+                        </code></pre>
+                        <div
+                            style="position: absolute; top: -15px; right: -15px; background: #ef4444; color: white; padding: 0.5rem 1rem; border-radius: 6px; transform: rotate(5deg); font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                            No Code Required!
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <i class="fab fa-js feature-icon"></i>
-                        <h4>jQuery</h4>
-                        <p style="font-size: 0.6em">Интерактивность</p>
-                    </div>
-                </div>
-                <div style="margin-top: 20px;">
-                    <pre><code class="html" data-trim data-noescape style="font-size: 0.8em; line-height: 1.2;">
-<!-- Пример использования Tailwind -->
-<div class="bg-white p-6 rounded-xl shadow-md">
-    <h3 class="text-xl font-bold text-indigo-600">Проект</h3>
-    <p class="text-gray-600">Адаптивный дизайн</p>
-</div>
-                    </code></pre>
                 </div>
             </section>
 
-            <!-- Slide 5: Automation Logic -->
+            <!-- Slide 5: How it Works -->
             <section>
-                <h2><i class="fas fa-cogs"></i> Автоматизация (Python)</h2>
-                <p style="font-size: 0.8em">Как работает <code>update.exe</code>:</p>
+                <div class="text-center" style="margin-bottom: 3rem;">
+                    <h2><i class="fas fa-play-circle" style="color: #2563eb;"></i> Как это работает</h2>
+                </div>
+
                 <div
-                    style="font-size: 0.7em; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                    <ol style="margin-left: 20px;">
-                        <li style="margin-bottom: 5px;"><strong>Сбор данных</strong>: CLI интерфейс спрашивает имя,
-                            навыки, проекты.</li>
-                        <li style="margin-bottom: 5px;"><strong>Парсинг</strong>: Библиотека <span
-                                class="highlight-text">BeautifulSoup4</span> читает <code>index.html</code>.</li>
-                        <li style="margin-bottom: 5px;"><strong>Модификация</strong>: Находит элементы по ID и классам.
-                        </li>
-                        <li><strong>Сборка</strong>: Сохраняет новый файл <code>update_index.html</code>.</li>
-                    </ol>
+                    style="display: flex; justify-content: space-between; align-items: stretch; max-width: 1000px; margin: 0 auto;">
+                    <div class="feature-item"
+                        style="flex: 1; margin: 0 1rem; display: flex; flex-direction: column; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: white;">
+                            1</div>
+                        <h4>Запуск</h4>
+                        <p style="color: #64748b;">Запустите <code>update.exe</code></p>
+                    </div>
+
+                    <div style="font-size: 2rem; color: #cbd5e1; align-self: center;"><i
+                            class="fas fa-chevron-right"></i></div>
+
+                    <div class="feature-item"
+                        style="flex: 1; margin: 0 1rem; display: flex; flex-direction: column; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: #7c3aed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: white;">
+                            2</div>
+                        <h4>Ввод</h4>
+                        <p style="color: #64748b;">Ответьте на вопросы</p>
+                    </div>
+
+                    <div style="font-size: 2rem; color: #cbd5e1; align-self: center;"><i
+                            class="fas fa-chevron-right"></i></div>
+
+                    <div class="feature-item"
+                        style="flex: 1; margin: 0 1rem; display: flex; flex-direction: column; justify-content: center;">
+                        <div
+                            style="width: 60px; height: 60px; background: #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; font-weight: bold; color: white;">
+                            3</div>
+                        <h4>Готово!</h4>
+                        <p style="color: #64748b;">Получите сайт</p>
+                    </div>
                 </div>
-                <pre><code class="python" data-trim data-noescape style="font-size: 0.8em; line-height: 1.2;">
-# Пример логики Python
-soup = BeautifulSoup(html_content, 'html.parser')
-name_tag = soup.find('h1', class_='text-4xl')
-if name_tag:
-    name_tag.string = user_input_name
-                </code></pre>
             </section>
 
-            <!-- Slide 6: Demo Workflow -->
+            <!-- Slide 6: Conclusion -->
             <section>
-                <h2><i class="fas fa-play-circle"></i> Как это работает</h2>
                 <div class="split-container">
-                    <div class="split-col feature-card">
-                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">1</span>
-                        <p style="font-size: 0.8em">Запустите <code>update.exe</code></p>
-                    </div>
-                    <div class="split-col feature-card">
-                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">2</span>
-                        <p style="font-size: 0.8em">Введите данные</p>
-                    </div>
-                    <div class="split-col feature-card">
-                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">3</span>
-                        <p style="font-size: 0.8em">Готово! 🚀</p>
-                    </div>
-                </div>
-                <p style="text-align: center; margin-top: 2rem; font-style: italic; font-size: 0.9em;">
-                    "Портфолио готово к публикации за 5 минут!"
-                </p>
-            </section>
+                    <div class="text-left">
+                        <h1 style="font-size: 3em !important;">Спасибо за внимание!</h1>
+                        <p style="font-size: 28px !important; margin-bottom: 3rem; color: #64748b;">Мы готовы ответить
+                            на ваши вопросы</p>
 
-            <!-- Slide 7: Features Showcase -->
-            <section>
-                <h2><i class="fas fa-star"></i> Ключевые фишки</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div style="text-align: left;">
-                        <p style="font-size: 0.8em; margin-bottom: 15px;"><i
-                                class="fas fa-mobile-alt highlight-text"></i> <strong>Полная
-                                адаптивность</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Отлично смотрится
-                                на телефоне и ПК.</span></p>
-                        <p style="font-size: 0.8em;"><i class="fas fa-filter highlight-text"></i> <strong>Фильтрация
-                                работ</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Сортировка по
-                                категориям.</span></p>
+                        <div style="display: flex; gap: 2rem;">
+                            <a href="#"
+                                style="color: #1e293b; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-weight: 600;">
+                                <i class="fab fa-github fa-2x"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#"
+                                style="color: #1e293b; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-weight: 600;">
+                                <i class="fab fa-telegram fa-2x"></i>
+                                <span>Telegram</span>
+                            </a>
+                        </div>
                     </div>
-                    <div style="text-align: left;">
-                        <p style="font-size: 0.8em; margin-bottom: 15px;"><i
-                                class="fas fa-chart-bar highlight-text"></i> <strong>Анимации</strong><br><span
-                                style="font-size: 0.8em; opacity: 0.7;">Живые прогресс-бары и счетчики.</span></p>
-                        <p style="font-size: 0.8em;"><i class="fas fa-file-code highlight-text"></i> <strong>Чистый
-                                код</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Легко поддерживать и
-                                расширять.</span></p>
+                    <!-- Fixed Image Container -->
+                    <div class="image-container"
+                        style="height: 400px; border: none; box-shadow: none; background: transparent;">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                            alt="Teamwork" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
                     </div>
                 </div>
-            </section>
-
-            <!-- Slide 8: Conclusion -->
-            <section class="title-slide">
-                <h1>Спасибо за внимание!</h1>
-                <p>Вопросы?</p>
-                <div style="margin-top: 2rem;">
-                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
-                            class="fab fa-github fa-2x"></i></a>
-                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
-                            class="fab fa-telegram fa-2x"></i></a>
-                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
-                            class="fas fa-envelope fa-2x"></i></a>
-                </div>
-                <p style="font-size: 0.6em; margin-top: 2rem; opacity: 0.6;">
-                    Проект доступен на GitHub
-                </p>
             </section>
 
         </div>
@@ -357,39 +466,43 @@ if name_tag:
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize Reveal.js with better defaults for this layout
+        // Initialize Reveal.js
         Reveal.initialize({
             controls: true,
             progress: true,
             center: true,
             hash: true,
-            margin: 0.1, // Add margin to prevent cutting off
-            width: 960,
-            height: 700,
+            slideNumber: 'c/t', // Format: current/total (e.g., 1/6)
+            margin: 0.05, // Reduced margin to fit larger text
+            width: 1200, // Increased width to fit larger text
+            height: 800, // Increased height
             minScale: 0.2,
             maxScale: 1.5,
-            transition: 'convex',
-            backgroundTransition: 'fade',
+            transition: 'slide',
+            backgroundTransition: 'slide',
             plugins: [RevealHighlight]
         });
 
-        // Create Particles
-        const particlesContainer = document.getElementById('particles');
-        const particleCount = 30; // Reduced count for performance
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-
-            // Random positioning and animation
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-            particle.style.animationDelay = (Math.random() * 10) + 's';
-            particle.style.opacity = Math.random() * 0.5;
-
-            particlesContainer.appendChild(particle);
-        }
+        // Initialize Particles.js - Darker particles for light theme
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#cbd5e1" }, /* Slate 300 */
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 4, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#cbd5e1", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } } }
+            },
+            "retina_detect": true
+        });
     </script>
 </body>
 
