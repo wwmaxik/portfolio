@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Шаблон</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: #667eea;
+            bottom: -10px;
+            left: 20%;
+        }
+        
+        .portfolio-item {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .counter {
+            display: inline-block;
+        }
+        
+        .btn-pulse:hover {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .portfolio-img {
+            overflow: hidden;
+        }
+        
+        .portfolio-img img {
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+        
+        .skill-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover .skill-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold text-indigo-600">Портфолио</a>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-600 hover:text-indigo-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="#home" class="text-gray-600 hover:text-indigo-600 font-medium transition">Главная</a></li>
+                    <li><a href="#about" class="text-gray-600 hover:text-indigo-600 font-medium transition">Обо мне</a></li>
+                    <li><a href="#skills" class="text-gray-600 hover:text-indigo-600 font-medium transition">Навыки</a></li>
+                    <li><a href="#portfolio" class="text-gray-600 hover:text-indigo-600 font-medium transition">Портфолио</a></li>
+                    <li><a href="#contact" class="text-gray-600 hover:text-indigo-600 font-medium transition">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div id="mobile-menu" class="hidden md:hidden py-4 border-t">
+                <ul class="space-y-4">
+                    <li><a href="#home" class="block text-gray-600 hover:text-indigo-600 font-medium">Главная</a></li>
+                    <li><a href="#about" class="block text-gray-600 hover:text-indigo-600 font-medium">Обо мне</a></li>
+                    <li><a href="#skills" class="block text-gray-600 hover:text-indigo-600 font-medium">Навыки</a></li>
+                    <li><a href="#portfolio" class="block text-gray-600 hover:text-indigo-600 font-medium">Портфолио</a></li>
+                    <li><a href="#contact" class="block text-gray-600 hover:text-indigo-600 font-medium">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="gradient-bg text-white pt-24 pb-20 md:pt-32 md:pb-28">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 fade-in">Веб-разработчик</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 fade-in">Создаю современные и адаптивные веб-сайты с использованием HTML5, CSS3 и JavaScript</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+                    <a href="#portfolio" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg btn-pulse">
+                        <i class="fas fa-eye mr-2"></i>Смотреть работы
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition btn-pulse">
+                        <i class="fas fa-paper-plane mr-2"></i>Связаться
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title fade-in">Обо мне</h2>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3 fade-in">
+                    <div class="rounded-2xl overflow-hidden shadow-xl">
+                        <img src="" 
+                             alt="Фото профиля" class="w-full h-auto">
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/3">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 fade-in">Веб-разработчик</h3>
+                    <p class="text-gray-600 mb-6 fade-in">Я студент специальности "Информационные системы и программирование". Увлекаюсь веб-разработкой и созданием современных пользовательских интерфейсов.</p>
+                    <p class="text-gray-600 mb-8 fade-in">В этом проекте я разработал шаблон сайта-портфолио, который может быть использован студентами и начинающими специалистами для демонстрации своих работ и навыков.</p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-calendar-alt text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Возраст: 21</span>
+                        </div>
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Город: Красноярск</span>
+                        </div>
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-graduation-cap text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Образование: Высшее</span>
+                        </div>
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-envelope text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Email: example@mail.ru</span>
+                        </div>
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-phone text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Телефон: +7 (XXX) XXX-XX-XX</span>
+                        </div>
+                        <div class="flex items-center fade-in">
+                            <i class="fas fa-briefcase text-indigo-500 mr-2"></i>
+                            <span class="text-gray-700">Статус: Студент</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title fade-in">Мои навыки</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md skill-card fade-in">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-code text-indigo-500 text-xl mr-3 skill-icon"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Frontend разработка</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">HTML5</span>
+                                <span class="text-gray-700">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">CSS3</span>
+                                <span class="text-gray-700">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">JavaScript</span>
+                                <span class="text-gray-700">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md skill-card fade-in">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tools text-indigo-500 text-xl mr-3 skill-icon"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Инструменты</h3>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Git</span>
+                                <span class="text-gray-700">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Figma</span>
+                                <span class="text-gray-700">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Tailwind CSS</span>
+                                <span class="text-gray-700">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-indigo-500 h-2 rounded-full skill-bar" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md text-center fade-in">
+                    <i class="fas fa-project-diagram text-indigo-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 counter" data-target="15">0</h3>
+                    <p class="text-gray-600">Завершенных проектов</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md text-center fade-in">
+                    <i class="fas fa-smile text-indigo-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 counter" data-target="10">0</h3>
+                    <p class="text-gray-600">Довольных клиентов</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md text-center fade-in">
+                    <i class="fas fa-award text-indigo-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 counter" data-target="2">0</h3>
+                    <p class="text-gray-600">Награды</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md text-center fade-in">
+                    <i class="fas fa-clock text-indigo-500 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 counter" data-target="1">0</h3>
+                    <p class="text-gray-600">Опыта работы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title fade-in">Мои работы</h2>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-10 fade-in">
+                <button class="filter-btn bg-indigo-500 text-white px-4 py-2 rounded-lg font-medium transition" data-filter="all">
+                    Все
+                </button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-indigo-500 hover:text-white transition" data-filter="web">
+                    Веб-сайты
+                </button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-indigo-500 hover:text-white transition" data-filter="app">
+                    Приложения
+                </button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-indigo-500 hover:text-white transition" data-filter="design">
+                    Дизайн
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="portfolio-item bg-white rounded-xl overflow-hidden shadow-lg fade-in" data-category="web">
+                    <div class="h-48 overflow-hidden portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                             alt="Корпоративный сайт" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Корпоративный сайт</h3>
+                        <p class="text-gray-600 mb-4">Адаптивный корпоративный сайт с современным дизайном</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-indigo-500 hover:text-indigo-700 font-medium flex items-center">
+                                Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                            <div class="flex space-x-2">
+                                <i class="fab fa-html5 text-red-500"></i>
+                                <i class="fab fa-css3-alt text-blue-500"></i>
+                                <i class="fab fa-js-square text-yellow-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item bg-white rounded-xl overflow-hidden shadow-lg fade-in" data-category="app">
+                    <div class="h-48 overflow-hidden portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551650992-7a4d51ee0dc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" 
+                             alt="Мобильное приложение" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Мобильное приложение</h3>
+                        <p class="text-gray-600 mb-4">Приложение для управления задачами с интуитивным интерфейсом</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-indigo-500 hover:text-indigo-700 font-medium flex items-center">
+                                Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                            <div class="flex space-x-2">
+                                <i class="fab fa-react text-blue-400"></i>
+                                <i class="fab fa-node-js text-green-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item bg-white rounded-xl overflow-hidden shadow-lg fade-in" data-category="design">
+                    <div class="h-48 overflow-hidden portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" 
+                             alt="Брендинг компании" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Брендинг компании</h3>
+                        <p class="text-gray-600 mb-4">Разработка фирменного стиля и логотипа для IT-компании</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#" class="text-indigo-500 hover:text-indigo-700 font-medium flex items-center">
+                                Подробнее <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                            <div class="flex space-x-2">
+                                <i class="fas fa-pen-nib text-purple-500"></i>
+                                <i class="fas fa-palette text-pink-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title fade-in">Контакты</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 fade-in">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Свяжитесь со мной</h3>
+                    <p class="text-gray-600 text-lg">Готов обсудить ваш проект или ответить на любые вопросы. Свяжитесь со мной любым удобным способом.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center contact-card fade-in">
+                        <div class="bg-indigo-100 p-4 rounded-full inline-flex mb-4">
+                            <i class="fas fa-map-marker-alt text-indigo-500 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Адрес</h4>
+                        <p class="text-gray-600">г. Красноярск, Россия</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center contact-card fade-in">
+                        <div class="bg-indigo-100 p-4 rounded-full inline-flex mb-4">
+                            <i class="fas fa-envelope text-indigo-500 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Email</h4>
+                        <p class="text-gray-600">example@mail.ru</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center contact-card fade-in">
+                        <div class="bg-indigo-100 p-4 rounded-full inline-flex mb-4">
+                            <i class="fas fa-phone text-indigo-500 text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-2">Телефон</h4>
+                        <p class="text-gray-600">+7 (XXX) XXX-XX-XX</p>
+                    </div>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-6">Социальные сети</h4>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="bg-indigo-500 text-white p-4 rounded-full hover:bg-indigo-600 transition btn-pulse">
+                            <i class="fab fa-vk text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-indigo-500 text-white p-4 rounded-full hover:bg-indigo-600 transition btn-pulse">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="bg-indigo-500 text-white p-4 rounded-full hover:bg-indigo-600 transition btn-pulse">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-300 hover:text-white transition">
+                    <i class="fab fa-vk text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white transition">
+                    <i class="fab fa-telegram text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white transition">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 Портфолио. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            checkFadeIn()
+            
+            $('#menu-toggle').click(function() {
+                $('#mobile-menu').slideToggle();
+            });
+            
+            $('.filter-btn').click(function() {
+                $('.filter-btn').removeClass('bg-indigo-500 text-white').addClass('bg-gray-200 text-gray-700');
+                
+                $(this).removeClass('bg-gray-200 text-gray-700').addClass('bg-indigo-500 text-white');
+                
+                const filterValue = $(this).data('filter');
+                
+                if (filterValue === 'all') {
+                    $('.portfolio-item').fadeIn();
+                } else {
+                    $('.portfolio-item').each(function() {
+                        if ($(this).data('category') === filterValue) {
+                            $(this).fadeIn();
+                        } else {
+                            $(this).fadeOut();
+                        }
+                    });
+                }
+            });
+            
+            $('a[href^="#"]').click(function(e) {
+                e.preventDefault();
+                
+                const targetId = $(this).attr('href');
+                if (targetId === '#') return;
+                
+                const targetElement = $(targetId);
+                if (targetElement.length) {
+                    $('html, body').animate({
+                        scrollTop: targetElement.offset().top - 80
+                    }, 800);
+                    
+                    $('#mobile-menu').slideUp();
+                }
+            });
+            
+            function checkFadeIn() {
+                $('.fade-in').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            
+            $(window).on('scroll load', checkFadeIn);
+            
+            function animateSkillBars() {
+                $('.skill-bar').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        const width = $(this).data('width');
+                        $(this).css('width', width);
+                    }
+                });
+            }
+            
+            $(window).on('scroll load', animateSkillBars);
+            
+            function animateCounters() {
+                $('.counter').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom && !$(this).hasClass('animated')) {
+                        $(this).addClass('animated');
+                        const target = $(this).data('target');
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+                        
+                        const timer = setInterval(function() {
+                            current += step;
+                            if (current >= target) {
+                                $(this).text(target);
+                                clearInterval(timer);
+                            } else {
+                                $(this).text(Math.floor(current));
+                            }
+                        }.bind(this), 16);
+                    }
+                });
+            }
+            
+            $(window).on('scroll load', animateCounters);
+            
+            $('.btn-pulse').hover(
+                function() {
+                    $(this).addClass('animate-pulse');
+                },
+                function() {
+                    $(this).removeClass('animate-pulse');
+                }
+            );
+
+            let isScrolling = false;
+            let scrollTimeout;
+            
+            $(window).on('wheel', function(e) {
+                if (isScrolling) return;
+                
+                clearTimeout(scrollTimeout);
+                isScrolling = true;
+                
+                if (e.originalEvent.deltaY > 0) {
+                    scrollToNextSection();
+                } else {
+                    scrollToPrevSection();
+                }
+                
+                scrollTimeout = setTimeout(function() {
+                    isScrolling = false;
+                }, 1000);
+            });
+            
+            function scrollToNextSection() {
+                const currentScroll = $(window).scrollTop();
+                const windowHeight = $(window).height();
+                const documentHeight = $(document).height();
+                
+                // Если мы уже внизу страницы, не делаем ничего
+                if (currentScroll + windowHeight >= documentHeight - 10) {
+                    isScrolling = false;
+                    return;
+                }
+                
+                const sections = $('section');
+                let nextSection = null;
+                
+                sections.each(function() {
+                    const sectionTop = $(this).offset().top;
+                    
+                    if (sectionTop > currentScroll + 100) {
+                        nextSection = $(this);
+                        return false;
+                    }
+                });
+                
+                if (nextSection) {
+                    $('html, body').animate({
+                        scrollTop: nextSection.offset().top - 80
+                    }, 800, function() {
+                        isScrolling = false;
+                    });
+                } else {
+                    // Если следующей секции нет, прокручиваем к футеру
+                    $('html, body').animate({
+                        scrollTop: documentHeight - windowHeight
+                    }, 800, function() {
+                        isScrolling = false;
+                    });
+                }
+            }
+            
+            function scrollToPrevSection() {
+                const currentScroll = $(window).scrollTop();
+                
+                // Если мы уже вверху страницы, не делаем ничего
+                if (currentScroll <= 10) {
+                    isScrolling = false;
+                    return;
+                }
+                
+                const sections = $('section');
+                let prevSection = null;
+                
+                sections.each(function() {
+                    const sectionTop = $(this).offset().top;
+                    
+                    if (sectionTop < currentScroll - 100) {
+                        prevSection = $(this);
+                    } else {
+                        return false;
+                    }
+                });
+                
+                if (prevSection) {
+                    $('html, body').animate({
+                        scrollTop: prevSection.offset().top - 80
+                    }, 800, function() {
+                        isScrolling = false;
+                    });
+                } else {
+                    // Если предыдущей секции нет, прокручиваем к началу
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 800, function() {
+                        isScrolling = false;
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

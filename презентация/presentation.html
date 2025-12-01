@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор Портфолио - Презентация</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" id="theme">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai.min.css">
+    <style>
+        /* Custom Styles for "Beautiful" Look */
+        body,
+        .reveal {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+        }
+
+        /* Fix for Reveal.js scaling */
+        .reveal .slides section {
+            text-align: left;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Title Slide Specifics */
+        .title-slide {
+            text-align: center !important;
+            align-items: center !important;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            text-transform: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal h1 {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
+            /* Reduced from 3.5em */
+            line-height: 1.2;
+        }
+
+        .reveal h2 {
+            color: #4facfe;
+            font-size: 1.8em;
+        }
+
+        .reveal h3 {
+            font-size: 1.3em;
+            color: #e0e0e0;
+        }
+
+        .reveal p,
+        .reveal li {
+            font-size: 1em;
+            /* Standardize font size */
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+
+        .highlight-text {
+            color: #00f2fe;
+            font-weight: bold;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            flex: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            /* Reduced size */
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .split-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .split-col {
+            flex: 1;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Changed to be above background but below content */
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(79, 172, 254, 0.3);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .reveal pre {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        /* Utility to ensure content fits */
+        .reveal .slides {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Title -->
+            <section class="title-slide">
+                <div style="margin-bottom: 1rem;">
+                    <i class="fas fa-rocket fa-3x"
+                        style="background: linear-gradient(to right, #4facfe, #00f2fe); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+                </div>
+                <h1>Генератор Портфолио</h1>
+                <h3>Профессиональный сайт за 5 минут</h3>
+                <p style="margin-top: 2rem; font-size: 0.8em; opacity: 0.7;">
+                    Кононенко Максим • Овчинников Глеб • Дроздов Андрей
+                </p>
+            </section>
+
+            <!-- Slide 2: The Problem -->
+            <section>
+                <h2><i class="fas fa-exclamation-triangle"></i> Проблема</h2>
+                <div class="split-container">
+                    <div class="feature-card">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h4>Долго</h4>
+                        <p style="font-size: 0.7em">Создание сайта с нуля занимает недели изучения HTML/CSS.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-money-bill-wave feature-icon"></i>
+                        <h4>Дорого</h4>
+                        <p style="font-size: 0.7em">Конструкторы (Tilda, Wix) требуют подписки.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-laptop-code feature-icon"></i>
+                        <h4>Сложно</h4>
+                        <p style="font-size: 0.7em">Новичкам трудно сделать адаптивность.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: The Solution -->
+            <section>
+                <h2><i class="fas fa-lightbulb"></i> Решение</h2>
+                <div class="split-container" style="align-items: center;">
+                    <div class="split-col">
+                        <ul style="font-size: 0.9em; list-style-type: none; padding: 0;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle highlight-text"></i>
+                                <strong>Готовый шаблон</strong><br><span style="opacity:0.7">Современный, адаптивный,
+                                    анимированный.</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle highlight-text"></i>
+                                <strong>Автоматизация</strong><br><span style="opacity:0.7">Программа
+                                    <code>update.exe</code> заполняет сайт за вас.</span></li>
+                            <li><i class="fas fa-check-circle highlight-text"></i> <strong>Без кода</strong><br><span
+                                    style="opacity:0.7">Не нужно знать HTML, просто ответьте на вопросы.</span></li>
+                        </ul>
+                    </div>
+                    <div class="split-col" style="text-align: center;">
+                        <i class="fas fa-magic fa-6x" style="opacity: 0.2; color: #4facfe;"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Frontend Tech -->
+            <section>
+                <h2><i class="fas fa-code"></i> Технологии: Frontend</h2>
+                <div class="split-container">
+                    <div class="feature-card">
+                        <i class="fab fa-html5 feature-icon"></i>
+                        <h4>HTML5</h4>
+                        <p style="font-size: 0.6em">Семантическая верстка</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-css3-alt feature-icon"></i>
+                        <h4>Tailwind</h4>
+                        <p style="font-size: 0.6em">Utility-first стили</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fab fa-js feature-icon"></i>
+                        <h4>jQuery</h4>
+                        <p style="font-size: 0.6em">Интерактивность</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <pre><code class="html" data-trim data-noescape style="font-size: 0.8em; line-height: 1.2;">
+<!-- Пример использования Tailwind -->
+<div class="bg-white p-6 rounded-xl shadow-md">
+    <h3 class="text-xl font-bold text-indigo-600">Проект</h3>
+    <p class="text-gray-600">Адаптивный дизайн</p>
+</div>
+                    </code></pre>
+                </div>
+            </section>
+
+            <!-- Slide 5: Automation Logic -->
+            <section>
+                <h2><i class="fas fa-cogs"></i> Автоматизация (Python)</h2>
+                <p style="font-size: 0.8em">Как работает <code>update.exe</code>:</p>
+                <div
+                    style="font-size: 0.7em; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 5px;"><strong>Сбор данных</strong>: CLI интерфейс спрашивает имя,
+                            навыки, проекты.</li>
+                        <li style="margin-bottom: 5px;"><strong>Парсинг</strong>: Библиотека <span
+                                class="highlight-text">BeautifulSoup4</span> читает <code>index.html</code>.</li>
+                        <li style="margin-bottom: 5px;"><strong>Модификация</strong>: Находит элементы по ID и классам.
+                        </li>
+                        <li><strong>Сборка</strong>: Сохраняет новый файл <code>update_index.html</code>.</li>
+                    </ol>
+                </div>
+                <pre><code class="python" data-trim data-noescape style="font-size: 0.8em; line-height: 1.2;">
+# Пример логики Python
+soup = BeautifulSoup(html_content, 'html.parser')
+name_tag = soup.find('h1', class_='text-4xl')
+if name_tag:
+    name_tag.string = user_input_name
+                </code></pre>
+            </section>
+
+            <!-- Slide 6: Demo Workflow -->
+            <section>
+                <h2><i class="fas fa-play-circle"></i> Как это работает</h2>
+                <div class="split-container">
+                    <div class="split-col feature-card">
+                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">1</span>
+                        <p style="font-size: 0.8em">Запустите <code>update.exe</code></p>
+                    </div>
+                    <div class="split-col feature-card">
+                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">2</span>
+                        <p style="font-size: 0.8em">Введите данные</p>
+                    </div>
+                    <div class="split-col feature-card">
+                        <span style="font-size: 2.5em; font-weight: bold; color: #4facfe;">3</span>
+                        <p style="font-size: 0.8em">Готово! 🚀</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2rem; font-style: italic; font-size: 0.9em;">
+                    "Портфолио готово к публикации за 5 минут!"
+                </p>
+            </section>
+
+            <!-- Slide 7: Features Showcase -->
+            <section>
+                <h2><i class="fas fa-star"></i> Ключевые фишки</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="text-align: left;">
+                        <p style="font-size: 0.8em; margin-bottom: 15px;"><i
+                                class="fas fa-mobile-alt highlight-text"></i> <strong>Полная
+                                адаптивность</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Отлично смотрится
+                                на телефоне и ПК.</span></p>
+                        <p style="font-size: 0.8em;"><i class="fas fa-filter highlight-text"></i> <strong>Фильтрация
+                                работ</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Сортировка по
+                                категориям.</span></p>
+                    </div>
+                    <div style="text-align: left;">
+                        <p style="font-size: 0.8em; margin-bottom: 15px;"><i
+                                class="fas fa-chart-bar highlight-text"></i> <strong>Анимации</strong><br><span
+                                style="font-size: 0.8em; opacity: 0.7;">Живые прогресс-бары и счетчики.</span></p>
+                        <p style="font-size: 0.8em;"><i class="fas fa-file-code highlight-text"></i> <strong>Чистый
+                                код</strong><br><span style="font-size: 0.8em; opacity: 0.7;">Легко поддерживать и
+                                расширять.</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Conclusion -->
+            <section class="title-slide">
+                <h1>Спасибо за внимание!</h1>
+                <p>Вопросы?</p>
+                <div style="margin-top: 2rem;">
+                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
+                            class="fab fa-github fa-2x"></i></a>
+                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
+                            class="fab fa-telegram fa-2x"></i></a>
+                    <a href="#" style="color: #fff; text-decoration: none; margin: 0 15px;"><i
+                            class="fas fa-envelope fa-2x"></i></a>
+                </div>
+                <p style="font-size: 0.6em; margin-top: 2rem; opacity: 0.6;">
+                    Проект доступен на GitHub
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script>
+        // Initialize Reveal.js with better defaults for this layout
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            margin: 0.1, // Add margin to prevent cutting off
+            width: 960,
+            height: 700,
+            minScale: 0.2,
+            maxScale: 1.5,
+            transition: 'convex',
+            backgroundTransition: 'fade',
+            plugins: [RevealHighlight]
+        });
+
+        // Create Particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30; // Reduced count for performance
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // Random positioning and animation
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particle.style.opacity = Math.random() * 0.5;
+
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+
+</html>
